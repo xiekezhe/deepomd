@@ -50,6 +50,7 @@ open_spiel/scripts/jill.sh
 *.err
 *.log
 *.std
+*.txt
 
 
 /results
