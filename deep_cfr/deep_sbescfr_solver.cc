@@ -212,7 +212,14 @@ double DeepSbESCFRSolver::UpdateRegrets(
     auto cfr_policy = current_policy_eval_[cur_player]
                           ->Inference(cur_player, inference_input)
                           .value;
+    // get ave policy new add
+    auto ave_cfr_policy = policy_eval_[cur_player]
+                          ->Inference(cur_player, inference_input)
+                          .value;
+    
     current_info_state.SetPolicy(cfr_policy);
+    //set ave policy new
+    current_info_state.SetCumulatePolicy(ave_cfr_policy);
     info_state_copy.SetPolicy(cfr_policy);
   }
 
@@ -236,7 +243,8 @@ double DeepSbESCFRSolver::UpdateRegrets(
     int aidx = current_info_state.SampleActionIndex(0.0, dist_(*rng));
     action_index = aidx;
     double new_reach = current_info_state.current_policy[aidx] * opponent_reach;
-    double new_ave_reach = 1.0 / legal_actions.size() * ave_opponent_reach;
+    //double new_ave_reach = 1.0 / legal_actions.size() * ave_opponent_reach;//change new add 
+    double new_ave_reach = current_info_state.cumulative_policy[aidx] * ave_opponent_reach;
     double new_sampling_reach =
         current_info_state.current_policy[aidx] * sampling_reach;
     value = UpdateRegrets(node->GetChild(legal_actions[aidx]), player,
