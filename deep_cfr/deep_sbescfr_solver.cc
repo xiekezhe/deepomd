@@ -284,7 +284,7 @@ if (step != 1) {
     std::vector<double> next_regret(legal_actions.size());
     std::vector<double> predicted_sub_values(legal_actions.size());
     std::vector<double> sub_values(legal_actions.size());
-    if (step == 1) {
+    if (step == 0) {
       sub_values = child_values;
     } else {
       // get z^(t+1)

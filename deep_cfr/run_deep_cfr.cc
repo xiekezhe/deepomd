@@ -142,7 +142,7 @@ int main(int argc, char** argv) {
     std::string str(buffer);
     std::string::size_type post;
     while ((post = str.find(":")) != str.npos) str.replace(post, 1, "_");
-    config.path = "./results/" + str + "." + absl::GetFlag(FLAGS_suffix);
+    config.path = "./testresults2/" + str + "." + absl::GetFlag(FLAGS_suffix);
   }
   config.graph_def = absl::GetFlag(FLAGS_graph_def);
   config.nn_model = absl::GetFlag(FLAGS_nn_model);

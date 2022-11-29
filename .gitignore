@@ -53,6 +53,8 @@ open_spiel/scripts/jill.sh
 
 
 /results
+/testresults
+/testresults2
 /images
 /tmp
 /log

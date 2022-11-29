@@ -1,13 +1,13 @@
 import argparse
 import os
 import stat
-
+import numpy as np
 
 def batch_comms(base_comm):
     use_gpus = False
     cuda_devices = [0, 1, 2]
     train_steps = [16]
-    cfr_batch_size = [100]
+    cfr_batch_size = [10000]
     train_batch_size = [128]
     run = "run_sbescfr"
     # game = "kuhn_poker"
@@ -17,10 +17,10 @@ def batch_comms(base_comm):
     # games = ["leduc18_poker"]
     # games = ["FHP2_poker"]
     # cfr_rm_scale = [1]
-    cfr_rm_scale = [1e3, 1e2, 1e1, 0.1]
+    cfr_rm_scale = [10**(x) for x in np.linspace(-4, -1, 30)]
     average_type = ["Opponent"]
     weight_type = ["Constant"]
-    cfr_mode = ["CFR"]
+    #cfr_mode = ["CFR"]
     comms = []
     names = []
     index = 0
@@ -35,8 +35,15 @@ def batch_comms(base_comm):
                                 cuda_devices[index % len(cuda_devices)])
                         cb = cfr_batch_size[0]
                         tb = train_batch_size[0]
-                        params = ["--game=" + game, "--cfr_batch_size=" + str(bs),
-                                  "--cfr_rm_scale=" + str(cr)]
+                        params = ["--use_regret_net=true","--use_policy_net=true","--use_tabular=false","--num_gpus=0",
+                        "--num_cpus=1","--actors=128","--memory_size=40000000","--policy_memory_size=40000000","--cfr_batch_size=" + str(bs),
+                        "--train_batch_size=10000","--train_steps=40","--policy_train_steps=4000",
+                        "--inference_batch_size=$actors","--inference_threads=$num_cpus","--inference_cache=1000000",
+                        "--omp_threads=$omp_thread","--exp_evaluation_window=true","--game=" + game,"--evaluation_window=10","--max_evaluation_window=100",
+                        "--average_type=LinearOpponent","--weight_type=Linear",
+                        "--checkpoint_freq=1000000","--max_steps=10000000","--graph_def= "," --verbose=false","--cfr_rm_scale=" + "{:.2e}".format(cr)]
+                        
+                                 
                         run_comm = base_comm.replace("placeholder", run)
                         comms.append(" ".join([run_comm] + params))
                         param_name = "_".join(params)
@@ -96,7 +103,7 @@ def run_comms(comms, names, prefix, bash_dir):
     ret = []
     for i, (comm, name) in enumerate(zip(comms, names)):
         bash_file_name = os.path.join(bash_dir, "_".join(
-            [prefix, name]) + ".sh")
+            [prefix, name]) + ".sh") #[prefix, name]
         with open(bash_file_name, "w") as f:
             f.write(comm)
         os.chmod(bash_file_name, os.stat(
@@ -125,7 +132,7 @@ if __name__ == "__main__":
     os.makedirs(args.bash_dir, exist_ok=True)
     comms, names = batch_comms(bash_lines)
     prefix = "_".join([args.prefix, args.bash])
-    comm_lines = run_comms(comms, names, prefix, args.bash_dir)
+    comm_lines = run_comms(comms, names, prefix, args.bash_dir)#names
     for comm in comm_lines:
         print(comm)
     if not args.dry_run:
