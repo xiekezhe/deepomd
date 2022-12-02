@@ -589,7 +589,7 @@ LearningInfo learn_imp_(const Game& game, const DeepCFRConfig& config,
           }
 
         } else {
-          std::cout<<"training ave policy"<<std::endl;
+          //std::cout<<"training ave policy"<<std::endl;
           loss += learn_model->TrainPolicy(player, train_inputs,
                                            config.learning_rate);
         }
