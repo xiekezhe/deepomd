@@ -281,13 +281,24 @@ void VPNetEvaluator::Runner(int device_id) {
                       ->InfValue(player_, inputs);
       }
     } else {
-      if (current_) {
+       if (current_) {
+        outputs = device_manager_.Get(1, device_id_)
+                      ->InfCurrentPolicy(player_,inputs);
+      } else if(z_){
+        outputs = device_manager_.Get(1, device_id_)
+                      ->InfzPolicy(player_,inputs);
+      } else {
+        outputs = device_manager_.Get(1, device_id_)
+                      ->InfPolicy(player_,inputs);
+      }
+      
+     /* if (current_) {
         outputs = device_manager_.Get(inputs.size(), device_id)
                       ->InfCurrentPolicy(player_, inputs);
       } else {
         outputs = device_manager_.Get(inputs.size(), device_id)
                       ->InfPolicy(player_, inputs);
-      }
+      }*/
     }
     for (int i = 0; i < promises.size(); ++i) {
       promises[i]->set_value(outputs[i]);

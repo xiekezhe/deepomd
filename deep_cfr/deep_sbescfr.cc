@@ -579,14 +579,17 @@ LearningInfo learn_imp_(const Game& game, const DeepCFRConfig& config,
         auto start = std::chrono::system_clock::now();
         if (value_or_policy) {
          if(!is_z)
-         { loss += learn_model->TrainCurrentPolicy(player, train_inputs,
+         { //std::cout<<"training current policy"<<std::endl;
+          loss += learn_model->TrainCurrentPolicy(player, train_inputs,
                                                   config.learning_rate);
           }else{
+             //std::cout<<"training z policy"<<std::endl;
           loss += learn_model->TrainzPolicy(player, train_inputs,
                                                   config.learning_rate);
           }
 
         } else {
+          std::cout<<"training ave policy"<<std::endl;
           loss += learn_model->TrainPolicy(player, train_inputs,
                                            config.learning_rate);
         }
@@ -721,7 +724,7 @@ void learner(
         auto learn_info = learn_imp_(
             game, config, device_manager, device_id, logger, rng, step,
             global_value_trajectory_queue, policy_z_replay_buffer[player], true,true,player,
-            config.memory_size, config.cfr_batch_size, config.train_steps,
+            config.memory_size, config.cfr_batch_size, config.train_steps,//new modified
             config.train_batch_size, alpha, new_cfr_value, true, stop);
         //cfr_value[player] = cfr_value[player] * 0.8 +
           //                  new_cfr_value[player] / config.cfr_batch_size * 0.2;
