@@ -1,8 +1,9 @@
-This is a implementation for paper <<Neural Future-Dependent Online Mirror Descent>>
+This is a implementation for paper &laquo Neural Future-Dependent Online Mirror Descent &raquo
 
 docker image are soo large to push to github.
 
 if you need it ,send email to zjxkz20170625@mail.ustc.edu.cn
+
 ============
 requirements
 ------------
