@@ -1,4 +1,6 @@
-This is a implementation for `Neural Counterfactual Regret Minimization with Bootstrapping Learning`.
+This is a implementation for `Neural Future-Dependent Online Mirror Descent`.
+docker image are soo large to push to github
+if you need it ,send email to zjxkz20170625@mail.ustc.edu.cn
 ============
 requirements
 ------------
