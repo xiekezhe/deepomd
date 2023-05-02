@@ -1,4 +1,4 @@
-This is a implementation for `Neural Future-Dependent Online Mirror Descent`.
+This is a implementation for paper<<Neural Future-Dependent Online Mirror Descent>>
 
 docker image are soo large to push to github.
 
