@@ -81,7 +81,7 @@ std::pair<Trajectory, Trajectory> DeepESCFRSolver::RunIteration(
   // Sample a chace seed at the start of an iteration.
   ChanceData chance_data = root_state_->SampleChance(rng);
   // NOTE: We do not need to clearCache if the networks are never updated. So
-  // the Cache should be clear by the learner. Don't do this:
+  // the Cache should be clear by the learner. Don't do this:20170625
   // value_eval_->ClearCache();
   UpdateRegrets(root_node_, player, 1, 1, 1, value_trajectory,
                 policy_trajectory, step, rng, chance_data);
