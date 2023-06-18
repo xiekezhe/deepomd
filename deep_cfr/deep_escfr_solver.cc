@@ -66,7 +66,7 @@ DeepESCFRSolver::RunIteration() {
   }
   return {value_trajectories, policy_trajectories};
 }
-
+//20170625
 std::pair<Trajectory, Trajectory> DeepESCFRSolver::RunIteration(Player player,
                                                                 int step) {
   return RunIteration(rng_, player, step);
