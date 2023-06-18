@@ -14,7 +14,7 @@
 #include <unordered_map>
 #include <unordered_set>
 #include <vector>
-
+//xkzxkz
 #include "absl/algorithm/container.h"
 #include "absl/strings/str_cat.h"
 #include "absl/strings/str_join.h"
@@ -159,7 +159,7 @@ void actor(const Game& game, const DeepCFRConfig& config, int num,
   }
   logger->Print("Got a quit.");
 }
-
+//20170625
 void evaluator(const open_spiel::Game& game, DeepCFRConfig& config, int num,
                DeviceManager* device_manager, int device_id, StopToken* stop) {
   FileLogger logger(config.path, absl::StrCat("evaluator-", num, "-mpi-", 0));
