@@ -4,6 +4,8 @@ docker image are soo large to push to github.
 
 if you need it ,send email to zjxkz20170625@mail.ustc.edu.cn
 
+You can also build the docker image through the script under this link.
+
 ============
 requirements
 ------------
