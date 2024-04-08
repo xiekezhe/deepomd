@@ -1,10 +1,8 @@
-This is a implementation for paper 《 Neural Future-Dependent Online Mirror Descent 》
+
 
 The Neural FD-OMD algorithm file is /deep_cfr/deep_sbescfr.cc、/deep_cfr/deep_sbescfr_solver.cc、/deep_cfr/deep_sbescfr_solver.h.
 
 docker image are soo large to push to github.
-
-if you need it ,send email to zjxkz20170625@mail.ustc.edu.cn
 
 You can also build the docker image through the script under this link.
 
